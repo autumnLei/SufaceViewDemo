@@ -85,10 +85,12 @@ public class CustomSurfaceView extends SurfaceView implements Runnable, SurfaceH
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.i(TAG, "onTouchEvent: "+Thread.currentThread());
         int x = (int) event.getX();
         int y = (int) event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                drawSomething();
                 mPath.moveTo(x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -100,8 +102,8 @@ public class CustomSurfaceView extends SurfaceView implements Runnable, SurfaceH
         return true;
     }
 
-
     public void drawSomething() {
+        Log.i(TAG, "drawSomething: "+Thread.currentThread());
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
             mCanvas.drawColor(Color.WHITE);
